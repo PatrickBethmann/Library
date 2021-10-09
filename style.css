@@ -2,6 +2,8 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     --header-color: lightskyblue;
     --footer-color: lightskyblue;
+    --book-color: lightsalmon;
+    --body-color: rgb(53%, 81%, 98%, 0.25);
 }
 *, *::before, *::after {
     box-sizing: border-box;
@@ -9,11 +11,17 @@
     margin: 0;
 }
 body{
+    background-color: var(--body-color);
     margin: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
+}
+
+.btn {
+    height: 20px;
+    width: 50px;
 }
 
 header {
@@ -35,11 +43,21 @@ header {
     align-items: center;
     padding: 50px;
 }
-#books {
+#bookGrid {
+    width: 100%;
     display: grid;
+    grid-template-columns: repeat(2, 1fr);
 }
-.book {
-    
+.bookCard {
+    background-color: var(--book-color);
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+
 }
 
 footer {
