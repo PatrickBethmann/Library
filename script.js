@@ -6,9 +6,9 @@ function Book(title, author, pages, isRead) {
     this.author = author;
     this.pages = pages;
     if(isRead) {
-        this.isRead = "already read";
+        this.isRead = true;
     } else {
-        this.isRead = "not read yet";
+        this.isRead = false;
     }
     
     this.info = function() {
@@ -20,7 +20,7 @@ function Book(title, author, pages, isRead) {
 
 
 // Test examples
-let book1 = new Book("First book", "Patrick", 24, true);
+let book1 = new Book("First book with larger text", "Patrick", 24, true);
 let book2 = new Book("Second book", "Tobias", 2042, false);
 myLibrary.push(book1, book2);
 
@@ -45,11 +45,17 @@ function createBookCard(book) {
     title.textContent = book.title;
     author.textContent = book.author;
     pages.textContent = book.pages;
+    readBtn.textContent = book.isRead ? "Read" : "Not read";
+    removeBtn.textContent = "Remove";
 
     // Set Classes
     bookCard.classList.add("bookCard");
-    readBtn.classList.add("btn");
-    removeBtn.classList.add("btn");
+    readBtn.classList.add("btn", book.isRead ? "btn-read" : "btn-notRead")
+    removeBtn.classList.add("btn", "btn-remove");
+
+    
+
+    
 
     // append elements
     bookCard.appendChild(title);

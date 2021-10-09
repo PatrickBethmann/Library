@@ -4,6 +4,9 @@
     --footer-color: lightskyblue;
     --book-color: lightsalmon;
     --body-color: rgb(53%, 81%, 98%, 0.25);
+    --button-color-read: lightgreen;
+    --button-color-notRead: lightcoral;
+    --button-color-remove: lightgray;
 }
 *, *::before, *::after {
     box-sizing: border-box;
@@ -20,9 +23,22 @@ body{
 }
 
 .btn {
-    height: 20px;
-    width: 50px;
+    height: 50px;
+    width: 100px;
+    font-size: 20px;
+    font-weight: bold;
 }
+.btn-read{
+    background-color: var(--button-color-read);
+}
+.btn-notRead {
+    background-color: var(--button-color-notRead);
+}
+.btn-remove {
+    background-color: var(--button-color-remove);
+}
+
+
 
 header {
     background-color: var(--header-color);
@@ -46,7 +62,7 @@ header {
 #bookGrid {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
 }
 .bookCard {
     background-color: var(--book-color);
@@ -57,7 +73,7 @@ header {
     align-items: center;
     gap: 20px;
     padding: 20px;
-
+    width: fit-content;
 }
 
 footer {
