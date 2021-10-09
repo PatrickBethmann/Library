@@ -1,5 +1,8 @@
 let myLibrary = [];
 const bookGrid = document.querySelector("#bookGrid");
+const bookModal = document.querySelector("#bookModal");
+const btnAddBook = document.querySelector("#btnAddBook");
+const overlay = document.querySelector("#overlay");
 
 function Book(title, author, pages, isRead) {
     this.title = title;
@@ -17,6 +20,11 @@ function Book(title, author, pages, isRead) {
 }
 
 
+
+
+function getBookFromInput() {
+    
+}
 
 
 // Test examples
@@ -64,5 +72,18 @@ function createBookCard(book) {
     bookCard.appendChild(readBtn);
     bookCard.appendChild(removeBtn);
     bookGrid.appendChild(bookCard);
+}
+
+function openBookModal() { 
+    bookModal.classList.add("active");
+    overlay.classList.add("active");
 
 }
+function closeBookModal() {
+    bookModal.classList.remove("active");
+    overlay.classList.remove("active");
+}
+
+// Onclick
+btnAddBook.onclick = openBookModal;
+overlay.onclick = closeBookModal;

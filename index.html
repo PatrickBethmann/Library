@@ -11,13 +11,26 @@
 </head>
 
 <body>
-  <header><h1>LIBRARY</h1></header>
-  <div id="main">
+  <header>
+    <h1>LIBRARY</h1>
+  </header>
+  <main id="main">
+    <button class="btn" id="btnAddBook">Add Book</button>
     <div id="bookGrid">
 
     </div>
-  </div>
+  </main>
   <footer>Copyright</footer>
+  <form id="bookModal" class="active">
+    <h2>Add Book</h2>
+    <input type="text" placeholder="Title">
+    <input type="text" placeholder="Author">
+    <input type="number" placeholder="Pages">
+    <label id="readCheckbox">Have you read it?<input class="checkbox" type="checkbox"></label>
+    <input type="submit" value="Add Book" class="btn btn-read">
+  </form>
+  <div id="overlay"></div>
+
 </body>
 
 </html>
