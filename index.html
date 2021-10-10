@@ -23,11 +23,11 @@
   <footer>Copyright</footer>
   <form id="bookModal" class="">
     <h2>Add Book</h2>
-    <input type="text" placeholder="Title">
-    <input type="text" placeholder="Author">
-    <input type="number" placeholder="Pages">
-    <label id="readCheckbox">Have you read it?<input class="checkbox" type="checkbox"></label>
-    <input type="submit" value="Add Book" class="btn btn-read">
+    <input type="text" id="inputTitle" placeholder="Title" required>
+    <input type="text" id="inputAuthor" placeholder="Author" required>
+    <input type="number" id="inputPages" placeholder="Pages" required>
+    <label id="readCheckbox">Have you read it?<input class="checkbox" id="inputRead" type="checkbox"></label>
+    <input type="button" id="btnCreateBook" value="Create Book" class="btn btn-read">
   </form>
   <div id="overlay"></div>
 

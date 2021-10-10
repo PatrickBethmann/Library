@@ -2,8 +2,15 @@ let myLibrary = [];
 const bookGrid = document.querySelector("#bookGrid");
 const bookModal = document.querySelector("#bookModal");
 const btnAddBook = document.querySelector("#btnAddBook");
+const btnCreateBook = document.querySelector("#btnCreateBook");
 const overlay = document.querySelector("#overlay");
+const inputTitle = document.querySelector("#inputTitle");
+const inputAuthor = document.querySelector("#inputAuthor");
+const inputPages = document.querySelector("#inputPages");
+const inputRead = document.querySelector("#inputRead");
 
+
+// Book constructor
 function Book(title, author, pages, isRead) {
     this.title = title;
     this.author = author;
@@ -19,13 +26,32 @@ function Book(title, author, pages, isRead) {
     }
 }
 
-
-
-
-function getBookFromInput() {
-    
+function createBookFromInput() {
+    // Get Input
+    title = inputTitle.textContent;
+    author = inputAuthor.textContent;
+    pages = inputPages.textContent;
+    isRead = inputRead.checked;
+    return new Book(title, author, pages, isRead);
 }
 
+function addBook() {
+    const newBook = createBookFromInput();
+    myLibrary.push(newBook)
+
+    updateBookGrid()
+}
+
+function updateBookGrid() {
+    resetBookGrid();
+    for(let i = 0; i<myLibrary.length; i++) {
+        createBookCard(myLibrary[i])
+    }
+}
+
+function resetBookGrid() {
+    bookGrid.innerHTML = "";
+}
 
 // Test examples
 let book1 = new Book("First book with larger text", "Patrick", 24, true);
@@ -39,6 +65,8 @@ myLibrary.forEach(book => {
     console.log(book.info());
 });
 console.log("--------------------------------------------------")
+
+
 
 function createBookCard(book) {
     // Create BookCard Elements
@@ -74,6 +102,7 @@ function createBookCard(book) {
     bookGrid.appendChild(bookCard);
 }
 
+// Open and close Modals
 function openBookModal() { 
     bookModal.classList.add("active");
     overlay.classList.add("active");
@@ -87,3 +116,5 @@ function closeBookModal() {
 // Onclick
 btnAddBook.onclick = openBookModal;
 overlay.onclick = closeBookModal;
+
+btnCreateBook.onclick = addBook;
