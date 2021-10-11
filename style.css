@@ -65,6 +65,8 @@ main {
   width: 100%;
   display: grid;
   justify-items: center;
+  grid-template-columns: auto;
+  grid-auto-flow: column;
 }
 .bookCard {
   background-color: var(--book-color);
@@ -114,10 +116,6 @@ main {
 }
 
 footer {
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
   height: 50px;
   background-color: var(--footer-color);
 

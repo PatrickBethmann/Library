@@ -8,7 +8,7 @@ const inputTitle = document.querySelector("#inputTitle");
 const inputAuthor = document.querySelector("#inputAuthor");
 const inputPages = document.querySelector("#inputPages");
 const inputRead = document.querySelector("#inputRead");
-
+console.log(inputTitle.value);
 
 // Book constructor
 function Book(title, author, pages, isRead) {
@@ -28,24 +28,43 @@ function Book(title, author, pages, isRead) {
 
 function createBookFromInput() {
     // Get Input
-    title = inputTitle.textContent;
-    author = inputAuthor.textContent;
-    pages = inputPages.textContent;
-    isRead = inputRead.checked;
+    const title = inputTitle.value;
+    const author = inputAuthor.value;
+    const pages = inputPages.value;
+    const isRead = inputRead.checked;
+    console.log(title);
+    if(!title || !author || !pages) {
+        console.log("couldnt create book from form");
+        return;
+    }
+    closeBookModal();
     return new Book(title, author, pages, isRead);
 }
 
+// Adds book to library
 function addBook() {
     const newBook = createBookFromInput();
-    myLibrary.push(newBook)
-
-    updateBookGrid()
+    if(newBook) {
+        myLibrary.push(newBook);
+    } else {
+        console.log("couldnt add book to myLibrary");
+    }
+    updateBookGrid();
 }
+
+function removeBook(index) {
+    console.log(index);
+    console.log(myLibrary);
+    myLibrary.splice(index, 1);
+    console.log(myLibrary);
+    updateBookGrid();
+}
+
 
 function updateBookGrid() {
     resetBookGrid();
     for(let i = 0; i<myLibrary.length; i++) {
-        createBookCard(myLibrary[i])
+        createBookCard(i, myLibrary[i])
     }
 }
 
@@ -60,15 +79,14 @@ myLibrary.push(book1, book2);
 
 console.log("--------------------------------------------------")
 console.log("All books:")
-myLibrary.forEach(book => {
-    createBookCard(book);
-    console.log(book.info());
-});
+for(let i = 0; i<myLibrary.length; i++) {
+    createBookCard(i, myLibrary[i]);
+}
 console.log("--------------------------------------------------")
 
 
 
-function createBookCard(book) {
+function createBookCard(index, book) {
     // Create BookCard Elements
     const bookCard = document.createElement("div");
     const title = document.createElement("h3");
@@ -83,6 +101,10 @@ function createBookCard(book) {
     pages.textContent = book.pages;
     readBtn.textContent = book.isRead ? "Read" : "Not read";
     removeBtn.textContent = "Remove";
+    removeBtn.id = "BtnRemove"+index;
+    removeBtn.addEventListener('click', () => {
+        removeBook(removeBtn.id.toString().substring(9));
+    });
 
     // Set Classes
     bookCard.classList.add("bookCard");
@@ -116,5 +138,4 @@ function closeBookModal() {
 // Onclick
 btnAddBook.onclick = openBookModal;
 overlay.onclick = closeBookModal;
-
 btnCreateBook.onclick = addBook;
