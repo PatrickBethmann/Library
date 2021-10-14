@@ -60,6 +60,16 @@ function removeBook(index) {
     updateBookGrid();
 }
 
+function toggleRead(index) {
+    const currentBook = myLibrary[index];
+    if(currentBook.isRead === true) {
+        currentBook.isRead = false;
+    } else {
+        currentBook.isRead = true;
+    }
+    updateBookGrid();
+}
+
 
 function updateBookGrid() {
     resetBookGrid();
@@ -100,6 +110,11 @@ function createBookCard(index, book) {
     author.textContent = book.author;
     pages.textContent = book.pages;
     readBtn.textContent = book.isRead ? "Read" : "Not read";
+    readBtn.id = "BtnRead"+index;
+    readBtn.addEventListener('click', () => {
+        toggleRead(readBtn.id.toString().substring(7))
+    });
+
     removeBtn.textContent = "Remove";
     removeBtn.id = "BtnRemove"+index;
     removeBtn.addEventListener('click', () => {
