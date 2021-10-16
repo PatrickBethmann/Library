@@ -11,18 +11,27 @@ const inputRead = document.querySelector("#inputRead");
 console.log(inputTitle.value);
 
 // Book constructor
-function Book(title, author, pages, isRead) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    if(isRead) {
-        this.isRead = true;
-    } else {
-        this.isRead = false;
+
+class Book {
+    constructor(title, author, pages, isRead) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        if (isRead) {
+            this.isRead = true;
+        } else {
+            this.isRead = false;
+        }
     }
-    
-    this.info = function() {
-        return `${this.title} by ${this.author}, ${this.pages} pages, ${this.isRead}`;
+    info() {
+        return `${this.title} by ${this.auhtor}, ${this.pages} pages, ${this.isRead}`;
+    }
+    toggleRead() {
+        if (this.isRead) {
+            this.isRead = false;
+        } else {
+            this.isRead = true;
+        }
     }
 }
 
@@ -33,7 +42,7 @@ function createBookFromInput() {
     const pages = inputPages.value;
     const isRead = inputRead.checked;
     console.log(title);
-    if(!title || !author || !pages) {
+    if (!title || !author || !pages) {
         console.log("couldnt create book from form");
         return;
     }
@@ -44,7 +53,7 @@ function createBookFromInput() {
 // Adds book to library
 function addBook() {
     const newBook = createBookFromInput();
-    if(newBook) {
+    if (newBook) {
         myLibrary.push(newBook);
     } else {
         console.log("couldnt add book to myLibrary");
@@ -60,21 +69,10 @@ function removeBook(index) {
     updateBookGrid();
 }
 
-function toggleRead(index) {
-    const currentBook = myLibrary[index];
-    if(currentBook.isRead === true) {
-        currentBook.isRead = false;
-    } else {
-        currentBook.isRead = true;
-    }
-    updateBookGrid();
-}
-
-
 function updateBookGrid() {
     resetBookGrid();
-    for(let i = 0; i<myLibrary.length; i++) {
-        createBookCard(i, myLibrary[i])
+    for (let i = 0; i < myLibrary.length; i++) {
+        createBookCard(i, myLibrary[i]);
     }
 }
 
@@ -87,14 +85,12 @@ let book1 = new Book("First book with larger text", "Patrick", 24, true);
 let book2 = new Book("Second book", "Tobias", 2042, false);
 myLibrary.push(book1, book2);
 
-console.log("--------------------------------------------------")
-console.log("All books:")
-for(let i = 0; i<myLibrary.length; i++) {
+console.log("--------------------------------------------------");
+console.log("All books:");
+for (let i = 0; i < myLibrary.length; i++) {
     createBookCard(i, myLibrary[i]);
 }
-console.log("--------------------------------------------------")
-
-
+console.log("--------------------------------------------------");
 
 function createBookCard(index, book) {
     // Create BookCard Elements
@@ -110,25 +106,22 @@ function createBookCard(index, book) {
     author.textContent = book.author;
     pages.textContent = book.pages;
     readBtn.textContent = book.isRead ? "Read" : "Not read";
-    readBtn.id = "BtnRead"+index;
-    readBtn.addEventListener('click', () => {
-        toggleRead(readBtn.id.toString().substring(7))
+    readBtn.id = "BtnRead" + index;
+    readBtn.addEventListener("click", () => {
+        book.toggleRead();
+        updateBookGrid();
     });
 
     removeBtn.textContent = "Remove";
-    removeBtn.id = "BtnRemove"+index;
-    removeBtn.addEventListener('click', () => {
+    removeBtn.id = "BtnRemove" + index;
+    removeBtn.addEventListener("click", () => {
         removeBook(removeBtn.id.toString().substring(9));
     });
 
     // Set Classes
     bookCard.classList.add("bookCard");
-    readBtn.classList.add("btn", book.isRead ? "btn-read" : "btn-notRead")
+    readBtn.classList.add("btn", book.isRead ? "btn-read" : "btn-notRead");
     removeBtn.classList.add("btn", "btn-remove");
-
-    
-
-    
 
     // append elements
     bookCard.appendChild(title);
@@ -140,10 +133,9 @@ function createBookCard(index, book) {
 }
 
 // Open and close Modals
-function openBookModal() { 
+function openBookModal() {
     bookModal.classList.add("active");
     overlay.classList.add("active");
-
 }
 function closeBookModal() {
     bookModal.classList.remove("active");
