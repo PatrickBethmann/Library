@@ -8,70 +8,63 @@ const inputTitle = document.querySelector('#inputTitle');
 const inputAuthor = document.querySelector('#inputAuthor');
 const inputPages = document.querySelector('#inputPages');
 const inputRead = document.querySelector('#inputRead');
-console.log(inputTitle.value);
+const errorMessage = document.querySelector('#errorMessage');
 
 // Book constructor
 function Book(title, author, pages, isRead) {
     this.title = title;
     this.author = author;
     this.pages = pages;
-    if (isRead) {
-        this.isRead = true;
-    } else {
-        this.isRead = false;
-    }
+    isRead === true ? (this.isRead = true) : (this.isRead = false);
 
     this.info = function () {
-        return `${this.title} by ${this.author}, ${this.pages} pages, ${this.isRead}`;
+        return `${this.title} by ${this.author}, ${this.pages} pages, ${this.isRead ? 'read' : 'not read yet'}`;
     };
 }
 
-function createBookFromInput() {
-    // Get Input
+function createBookFromModal() {
     const title = inputTitle.value;
     const author = inputAuthor.value;
     const pages = inputPages.value;
     const isRead = inputRead.checked;
-    console.log(title);
+
+    // checking wether required fields are filled out
     if (!title || !author || !pages) {
-        console.log('couldnt create book from form');
+        errorMessage.textContent = 'Please fill out the form!';
         return;
     }
+
     closeBookModal();
     return new Book(title, author, pages, isRead);
 }
 
 // Adds book to library
 function addBook() {
-    const newBook = createBookFromInput();
+    const newBook = createBookFromModal();
     if (newBook) {
         myLibrary.push(newBook);
     } else {
-        console.log('couldnt add book to myLibrary');
+        return;
     }
     updateBookGrid();
 }
 
 function removeBook(index) {
-    console.log(index);
-    console.log(myLibrary);
     myLibrary.splice(index, 1);
-    console.log(myLibrary);
     updateBookGrid();
 }
 
 function toggleRead(index) {
     const currentBook = myLibrary[index];
-    if (currentBook.isRead === true) {
-        currentBook.isRead = false;
-    } else {
-        currentBook.isRead = true;
-    }
+    currentBook.isRead = !currentBook.isRead;
     updateBookGrid();
 }
 
 function updateBookGrid() {
+    // Clears the entire book grid
     resetBookGrid();
+    // then adds all books from the current myLibrary-array
+    // not the most efficient way but it gets the job done :)
     for (let i = 0; i < myLibrary.length; i++) {
         createBookCard(i, myLibrary[i]);
     }
@@ -81,20 +74,8 @@ function resetBookGrid() {
     bookGrid.innerHTML = '';
 }
 
-// Test examples
-let book1 = new Book('First book with larger text', 'Patrick', 24, true);
-let book2 = new Book('Second book', 'Tobias', 2042, false);
-myLibrary.push(book1, book2);
-
-console.log('--------------------------------------------------');
-console.log('All books:');
-for (let i = 0; i < myLibrary.length; i++) {
-    createBookCard(i, myLibrary[i]);
-}
-console.log('--------------------------------------------------');
-
 function createBookCard(index, book) {
-    // Create BookCard Elements
+    // Creates all the elements of the book card
     const bookCard = document.createElement('div');
     const title = document.createElement('h3');
     const author = document.createElement('h3');
@@ -102,38 +83,43 @@ function createBookCard(index, book) {
     const readBtn = document.createElement('button');
     const removeBtn = document.createElement('button');
 
-    // Edit Contents
+    // Displays the right content
     title.textContent = book.title;
     author.textContent = book.author;
     pages.textContent = book.pages;
-    readBtn.textContent = book.isRead ? 'Read' : 'Not read';
+    readBtn.textContent = book.isRead ? 'Read' : 'Not Read';
     readBtn.id = 'BtnRead' + index;
     readBtn.addEventListener('click', () => {
-        toggleRead(readBtn.id.toString().substring(7));
+        toggleRead(readBtn.id.toString().substring(7)); // not the best solution
     });
 
     removeBtn.textContent = 'Remove';
     removeBtn.id = 'BtnRemove' + index;
     removeBtn.addEventListener('click', () => {
-        removeBook(removeBtn.id.toString().substring(9));
+        removeBook(removeBtn.id.toString().substring(9)); // not the best solution
     });
 
     // Set Classes
     bookCard.classList.add('bookCard');
+    title.classList.add('bookCardText');
+    author.classList.add('bookCardText');
+    pages.classList.add('bookCardText');
     readBtn.classList.add('btn', book.isRead ? 'btn-read' : 'btn-notRead');
     removeBtn.classList.add('btn', 'btn-remove');
 
-    // append elements
+    // append elements to bookCard
     bookCard.appendChild(title);
     bookCard.appendChild(author);
     bookCard.appendChild(pages);
     bookCard.appendChild(readBtn);
     bookCard.appendChild(removeBtn);
+    // append bookCard to bookGrid
     bookGrid.appendChild(bookCard);
 }
 
 // Open and close Modals
 function openBookModal() {
+    errorMessage.textContent = '';
     bookModal.classList.add('active');
     overlay.classList.add('active');
 }
@@ -142,7 +128,7 @@ function closeBookModal() {
     overlay.classList.remove('active');
 }
 
-// Onclick
+// Onclick-Events
 btnAddBook.onclick = openBookModal;
 overlay.onclick = closeBookModal;
 btnCreateBook.onclick = addBook;

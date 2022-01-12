@@ -64,11 +64,12 @@ main {
     gap: 30px;
 }
 #bookGrid {
-    width: 100%;
+    width: 100vw;
     display: grid;
     justify-items: center;
     grid-template-columns: auto;
     grid-auto-flow: column;
+    overflow: auto;
 }
 .bookCard {
     background-color: var(--book-color);
@@ -80,6 +81,16 @@ main {
     gap: 20px;
     padding: 20px;
     width: fit-content;
+    width: 220px;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0 10px;
+}
+.bookCardText {
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #bookModal {
@@ -120,7 +131,6 @@ main {
 footer {
     height: 50px;
     background-color: var(--footer-color);
-
     display: flex;
     justify-content: center;
     align-items: center;
