@@ -6,7 +6,7 @@ Library-App for The Odins Project
 
 View the current build at:
 
-https://patrickbethmann.github.io/calculator/
+https://patrickbethmann.github.io/Library/
 
 **Patrick Bethmann**
 
