@@ -1,136 +1,138 @@
 :root {
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  --header-color: lightskyblue;
-  --footer-color: lightskyblue;
-  --book-color: lightsalmon;
-  --body-color: rgb(53%, 81%, 98%, 0.25);
-  --button-color-read: lightgreen;
-  --button-color-notRead: lightcoral;
-  --button-color-remove: lightgray;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    --header-color: lightskyblue;
+    --footer-color: lightskyblue;
+    --book-color: lightsalmon;
+    --body-color: rgb(53%, 81%, 98%, 0.25);
+    --button-color-read: lightgreen;
+    --button-color-notRead: lightcoral;
+    --button-color-remove: lightgray;
 }
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
+
 body {
-  background-color: var(--body-color);
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: stretch;
+    background-color: var(--body-color);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    min-height: 100vh;
 }
 
 .btn {
-  height: 60px;
-  width: 120px;
-  font-size: 20px;
-  font-weight: bold;
+    height: 60px;
+    width: 120px;
+    font-size: 20px;
+    font-weight: bold;
 }
 .btn-read {
-  background-color: var(--button-color-read);
+    background-color: var(--button-color-read);
 }
 .btn-notRead {
-  background-color: var(--button-color-notRead);
+    background-color: var(--button-color-notRead);
 }
 .btn-remove {
-  background-color: var(--button-color-remove);
+    background-color: var(--button-color-remove);
 }
 
 header {
-  background-color: var(--header-color);
-  width: 100%;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    background-color: var(--header-color);
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  /* Font specific */
-  color: white;
-  font-size: 40px;
+    /* Font specific */
+    color: white;
+    font-size: 40px;
 }
 
 main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 50px;
-  gap: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    gap: 30px;
 }
 #bookGrid {
-  width: 100%;
-  display: grid;
-  justify-items: center;
-  grid-template-columns: auto;
-  grid-auto-flow: column;
+    width: 100%;
+    display: grid;
+    justify-items: center;
+    grid-template-columns: auto;
+    grid-auto-flow: column;
 }
 .bookCard {
-  background-color: var(--book-color);
-  border: 1px solid black;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  gap: 20px;
-  padding: 20px;
-  width: fit-content;
+    background-color: var(--book-color);
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    width: fit-content;
 }
 
 #bookModal {
-  z-index: 1;
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  background-color: lightskyblue;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  color: white;
+    z-index: 1;
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background-color: lightskyblue;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
 }
 #bookModal input,
 #readCheckbox {
-  width: 300px;
-  font-size: 30px;
+    width: 300px;
+    font-size: 30px;
 }
 #bookModal #readCheckbox {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 #bookModal .checkbox {
-  width: 30px;
-  height: 30px;
+    width: 30px;
+    height: 30px;
 }
 
 #bookModal.active {
-  transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(1);
 }
 
 footer {
-  height: 50px;
-  background-color: var(--footer-color);
+    height: 50px;
+    background-color: var(--footer-color);
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #overlay {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  transform: scale(0);
-  background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    transform: scale(0);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 #overlay.active {
-  transform: scale(1);
+    transform: scale(1);
 }
