@@ -88,15 +88,13 @@ function createBookCard(index, book) {
     author.textContent = book.author;
     pages.textContent = book.pages;
     readBtn.textContent = book.isRead ? 'Read' : 'Not Read';
-    readBtn.id = 'BtnRead' + index;
     readBtn.addEventListener('click', () => {
-        toggleRead(readBtn.id.toString().substring(7)); // not the best solution
+        toggleRead(index); // not the best solution
     });
 
     removeBtn.textContent = 'Remove';
-    removeBtn.id = 'BtnRemove' + index;
     removeBtn.addEventListener('click', () => {
-        removeBook(removeBtn.id.toString().substring(9)); // not the best solution
+        removeBook(index); // not the best solution
     });
 
     // Set Classes
