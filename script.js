@@ -89,12 +89,12 @@ function createBookCard(index, book) {
     pages.textContent = book.pages;
     readBtn.textContent = book.isRead ? 'Read' : 'Not Read';
     readBtn.addEventListener('click', () => {
-        toggleRead(index); // not the best solution
+        toggleRead(index);
     });
 
     removeBtn.textContent = 'Remove';
     removeBtn.addEventListener('click', () => {
-        removeBook(index); // not the best solution
+        removeBook(index);
     });
 
     // Set Classes
