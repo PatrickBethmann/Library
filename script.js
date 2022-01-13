@@ -11,13 +11,15 @@ const inputRead = document.querySelector('#inputRead');
 const errorMessage = document.querySelector('#errorMessage');
 
 // Book constructor
-function Book(title, author, pages, isRead) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    isRead === true ? (this.isRead = true) : (this.isRead = false);
+class Book {
+    constructor(title, author, pages, isRead) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        isRead === true ? (this.isRead = true) : (this.isRead = false);
+    }
 
-    this.info = function () {
+    info = function () {
         return `${this.title} by ${this.author}, ${this.pages} pages, ${this.isRead ? 'read' : 'not read yet'}`;
     };
 }
