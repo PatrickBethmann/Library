@@ -39,7 +39,7 @@ function createBookFromModal() {
 }
 
 // Adds book to library
-function addBook() {
+function addBookToLibrary() {
     const newBook = createBookFromModal();
     if (newBook) {
         myLibrary.push(newBook);
@@ -131,4 +131,4 @@ function closeBookModal() {
 // Onclick-Events
 btnAddBook.onclick = openBookModal;
 overlay.onclick = closeBookModal;
-btnCreateBook.onclick = addBook;
+btnCreateBook.onclick = addBookToLibrary;
